@@ -1,4 +1,4 @@
-name: CI OpenDDS
+name: CI CycloneDDS
 on:
   pull_request:
   push:
