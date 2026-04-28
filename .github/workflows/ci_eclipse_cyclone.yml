@@ -42,10 +42,10 @@ jobs:
           cmake -DCMAKE_INSTALL_PREFIX=../install/ ..
           cmake --build .
           cmake --build . --target install
+          export CycloneDDS_DIR=/home/runner/dds-rtps/dds-rtps/CycloneDDS/install/lib/cmake/CycloneDDS/
       - name: 'Build Application'
         shell: bash
         run: |-
-          ls -R CycloneDDS/install
           mkdir -p build
           cd build
           cmake -DCMAKE_PREFIX_PATH=/home/runner/dds-rtps/dds-rtps/CycloneDDS/install/ ../srcC/cyclone-dds-cmake
