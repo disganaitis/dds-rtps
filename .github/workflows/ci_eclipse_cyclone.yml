@@ -45,5 +45,6 @@ jobs:
       - name: 'Build Application'
         shell: bash
         run: |-
+          ls .
           cmake -S srcC/cyclone-dds-cmake -B build -DCMAKE_PREFIX_PATH=CycloneDDS/install
           cmake --build build
