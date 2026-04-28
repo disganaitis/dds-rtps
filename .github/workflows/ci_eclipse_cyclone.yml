@@ -48,5 +48,5 @@ jobs:
         run: |-
           mkdir -p build
           cd build
-          cmake -DCMAKE_PREFIX_PATH=/home/runner/dds-rtps/dds-rtps/CycloneDDS/build/ ../srcC/cyclone-dds-cmake
+          cmake -DCMAKE_PREFIX_PATH=/home/runner/dds-rtps/dds-rtps/CycloneDDS/install/ ../srcC/cyclone-dds-cmake
           cmake --build .
