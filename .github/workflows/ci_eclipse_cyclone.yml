@@ -45,14 +45,14 @@ jobs:
       - name: 'Build Application'
         shell: bash
         run: |-
-          mkdir -p srcC/cyclone-dds-cmake/build
-          cd srcC/cylone-dds-cmake/build
-          cmake -DCMAKE_PREFIX_PATH=/home/runner/work/dds-rtps/dds-rtps/CycloneDDS/install/ ..
+          mkdir -p build
+          cd build
+          cmake -DCMAKE_PREFIX_PATH=/home/runner/work/dds-rtps/dds-rtps/CycloneDDS/install/ ../srcC/cyclone-dds-cmake/
           cmake --build .
       - name: Rename executable
         run: |-
-          executable=$( ls srcC/cyclone-dds-cmake/build | grep cyclone )
-          zip --junk-paths artifacts/${executable}.zip srcC/cyclone-dds-cmake/build/${executable}
+          executable=$( ls build | grep cyclone )
+          zip --junk-paths artifacts/${executable}.zip build/${executable}
       - name: Upload executable artifact
         uses: actions/upload-artifact@v4
         with:
