@@ -52,6 +52,7 @@ jobs:
       - name: Rename executable
         run: |-
           executable=$( ls build | grep cyclone )
+          mkdir -p artifacts
           zip --junk-paths artifacts/${executable}.zip build/${executable}
       - name: Upload executable artifact
         uses: actions/upload-artifact@v4
