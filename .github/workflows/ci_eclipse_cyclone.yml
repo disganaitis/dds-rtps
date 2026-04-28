@@ -1,0 +1,49 @@
+name: CI OpenDDS
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: '10 0 * * 0'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        dds:
+          - eclipse_cyclone
+        runner:
+          - ubuntu-24.04
+
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - name: 'Checkout dds-rtps'
+        uses: actions/checkout@v4
+      - name: 'Checkout CycloneDDS'
+        uses: actions/checkout@v4
+        with:
+          repository: eclipse-cyclonedds/cyclonedds
+          ref: master
+          path: CycloneDDS
+          fetch-depth: 1
+          submodules: true
+      - name: 'Build CycloneDDS'
+        shell: bash
+        run: |-
+          cd CycloneDDS
+          mkdir build
+          cd build
+          cmake -DCMAKE_INSTALL_PREFIX=../install/ ..
+          cmake --build .
+          cmake --build . --target install
+      - name: 'Build Application'
+        shell: bash
+        run: |-
+          cmake -S srcC/cyclone-dds-cmake -B build -DCMAKE_PREFIX_PATH=CycloneDDS/install
+          cmake --build build
