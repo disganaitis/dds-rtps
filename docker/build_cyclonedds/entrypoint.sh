@@ -36,7 +36,7 @@ git pull
 cd srcC/cyclone-dds-cmake
 mkdir build
 cd build
-cmake -DOPENSSL_ROOT_DIR=/opt/openssl -DCycloneDDS_DIR="/opt/cyclonedds/install/lib/cmake/CycloneDDS/CycloneDDSConfig.cmake" -DCMAKE_PREFIX_PATH="/opt/cyclonedds/build-dynlib/install" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CROSSCOMPILING=1 -DCMAKE_SYSTEM_NAME=Linux -DBUILD_SHARED_LIBS=0 ..
+cmake -DOPENSSL_ROOT_DIR=/opt/openssl -DCMAKE_PREFIX_PATH="/opt/cyclonedds/install" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CROSSCOMPILING=1 -DCMAKE_SYSTEM_NAME=Linux -DBUILD_SHARED_LIBS=0 ..
 cmake --build .
 
 echo "Copy build output to mount"
