@@ -2,8 +2,8 @@ FROM ubuntu:22.04 AS builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update
-RUN apt-get install -y git cmake build-essential
+RUN apt-get update && apt-get -y upgrade
+RUN apt-get install --fix-missing -y git cmake build-essential
 RUN rm -rf /var/lib/apt/lists/*
 	
 WORKDIR /opt

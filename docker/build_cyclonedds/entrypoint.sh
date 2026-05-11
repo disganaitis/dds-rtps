@@ -36,6 +36,7 @@ git pull
 cd srcC/cyclone-dds-cmake
 mkdir build
 cd build
+/opt/cyclonedds/build-dynlib/install/bin/idlc ../../shape.idl
 cmake -DOPENSSL_ROOT_DIR=/opt/openssl -DCMAKE_PREFIX_PATH="/opt/cyclonedds/install" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CROSSCOMPILING=1 -DCMAKE_SYSTEM_NAME=Linux -DBUILD_SHARED_LIBS=0 ..
 cmake --build .
 
