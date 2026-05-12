@@ -37,7 +37,7 @@ cd srcC/cyclone-dds-cmake
 mkdir build
 cd build
 /opt/cyclonedds/build-dynlib/install/bin/idlc ../../shape.idl
-cmake -DOPENSSL_ROOT_DIR=/opt/openssl -DCMAKE_PREFIX_PATH="/opt/cyclonedds/install" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CROSSCOMPILING=1 -DCMAKE_SYSTEM_NAME=Linux -DBUILD_SHARED_LIBS=0 ..
+cmake -DOPENSSL_ROOT_DIR=/opt/openssl -DIDLC_ROOT="/opt/cyclonedds/build-dynlib/install/bin" -DCMAKE_PREFIX_PATH="/opt/cyclonedds/install" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CROSSCOMPILING=1 -DCMAKE_SYSTEM_NAME=Linux -DBUILD_SHARED_LIBS=0 ..
 cmake --build .
 
 echo "Copy build output to mount"
