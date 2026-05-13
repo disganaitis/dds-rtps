@@ -2,7 +2,7 @@
 
 cur_time=$(date +%F_%H-%M-%S)
 
-out_dir=outputs
+out_dir=./outputs/
 
 while getopts ":x:p:s:o:h" opt; do
     case $opt in

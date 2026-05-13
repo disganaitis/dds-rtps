@@ -15,7 +15,8 @@ git pull
 echo "Build dynamic CycloneDDS"
 mkdir build-dynlib
 cd build-dynlib
-cmake -DCMAKE_INSTALL_PREFIX=install ..
+cmake -DENABLE_TOPIC_DISCOVERY=NO -DENABLE_TYPE_DISCOVERY=NO -DENABLE_TYPELIB=NO \
+	-DCMAKE_INSTALL_PREFIX=install ..
 cmake --build . --target install -- -j$(nproc)
 cd ..
 
@@ -24,6 +25,7 @@ mkdir build
 cd build
 cmake -DOPENSSL_ROOT_DIR=/opt/openssl -DCMAKE_PREFIX_PATH=$PWD/../build-dynlib/install -DCMAKE_BUILD_TYPE=Debug \
 	-DCMAKE_CROSSCOMPILING=1 -DCMAKE_SYSTEM_NAME=Linux -DBUILD_SHARED_LIBS=0 -DBUILD_EXAMPLES=1 \
+	-DENABLE_TOPIC_DISCOVERY=NO -DENABLE_TYPE_DISCOVERY=NO -DENABLE_TYPELIB=NO \
 	-DCMAKE_INSTALL_PREFIX=../install ..
 cmake --build . --target install -- -j$(nproc)
 cd ../..
