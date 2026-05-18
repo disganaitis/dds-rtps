@@ -4,7 +4,14 @@ cur_time=$(date +%F_%H-%M-%S)
 
 out_dir=./outputs/
 
+argcount=0
+
 while getopts ":x:p:s:o:h" opt; do
+    argcount=$(( argcount + 1 ))
+    if [[ -v OPTARG ]]
+    then
+        argcount=$(( argcount + 1 ))
+    fi
     case $opt in
         x)
             exec_dir=$OPTARG
@@ -40,6 +47,12 @@ while getopts ":x:p:s:o:h" opt; do
             ;;
     esac
 done
+
+shift $(( argcount ))
+if [[ $1 == "--" ]]
+then
+    shift
+fi
 
 if [[ ! -d $exec_dir ]]
 then
@@ -78,9 +91,9 @@ do
     do
         if [[ ( ( ! -v pub ) && ( ! -v sub ) ) || ( -v pub && $pub == $pub_exe ) || ( -v sub && $sub == $sub_exe ) ]]
         then
-            docker network create -d bridge --subnet=172.0.$i.0/24 bridge-$pub_exe-$sub_exe
+            docker network create -d bridge --subnet=192.168.$i.0/24 bridge-$pub_exe-$sub_exe
             i=$(( i + 1 ))
-            docker run --name "$cur_time"_dds-rtps_"$pub_exe"_"$sub_exe" --network=bridge-$pub_exe-$sub_exe -v $exec_dir:/opt/executables:ro -v $out_dir:/opt/outputs dds-rtps_runner $pub_exe $sub_exe &
+            docker run --name "$cur_time"_dds-rtps_"$pub_exe"_"$sub_exe" --network=bridge-$pub_exe-$sub_exe -v $exec_dir:/opt/executables:ro -v $out_dir:/opt/outputs dds-rtps_runner $pub_exe $sub_exe $@ &
         fi
     done
 done
